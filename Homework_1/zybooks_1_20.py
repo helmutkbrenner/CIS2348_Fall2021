@@ -2,6 +2,7 @@
 # 2037275 #
 
 if __name__ == '__main__':
+    # used print and input statements to retrieve and compute the numbers.
     user_num1 = int(input('Enter integer:\n'))
 
     print('You entered: {}'.format(user_num1))
