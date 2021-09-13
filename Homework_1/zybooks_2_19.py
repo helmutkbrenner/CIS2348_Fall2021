@@ -11,7 +11,7 @@ if __name__ == '__main__':
 
     #  Output the ingredient list to the screen
 
-    print('Lemonade Ingredients - yields {:.2f} servings'.format(numservings))
+    print('Lemonade ingredients - yields {:.2f} servings'.format(numservings))
     print('{:.2f} cup(s) lemon juice'.format(cupslemjuice))
     print('{:.2f} cup(s) water'.format(cupswater))
     print('{:.2f} cup(s) agave nectar'.format(cupsagave))
@@ -20,3 +20,13 @@ if __name__ == '__main__':
 
     desiredservings = int(input('How many servings would you like to make?\n'))
 
+    # divide desired servings by num of servings in recipe to get multiplier for ingredients.
+
+    mulitplier = desiredservings / numservings
+
+    # reprint the ingredients list with the num of desired servings and adjusted ingredients list
+
+    print('Lemonade ingredients - yields {:.2f} servings'.format(desiredservings))
+    print('{:.2f} cup(s) lemon juice'.format(cupslemjuice * mulitplier))
+    print('{:.2f} cup(s) water'.format(cupswater * mulitplier))
+    print('{:.2f} cup(s) agave nectar'.format(cupsagave * mulitplier))
