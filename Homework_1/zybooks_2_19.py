@@ -29,7 +29,7 @@ if __name__ == '__main__':
     print('\nLemonade ingredients - yields {:.2f} servings'.format(desiredservings))
     print('{:.2f} cup(s) lemon juice'.format(cupslemjuice * mulitplier))
     print('{:.2f} cup(s) water'.format(cupswater * mulitplier))
-    print('{:.2f} cup(s) agave nectar'.format(cupsagave * mulitplier))
+    print('{:.2f} cup(s) agave nectar\n'.format(cupsagave * mulitplier))
 
     # reprint the augmented ingredients list in gallon units.
 
