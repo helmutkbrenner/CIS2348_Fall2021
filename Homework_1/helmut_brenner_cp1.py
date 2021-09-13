@@ -23,15 +23,7 @@ if __name__ == '__main__':
     time_delta = current_day - user_birthday
     years_old = time_delta.days//365
 
-    if current_date == user_b_day & current_month == user_b_month:
-        print('Happy birthday, you are {} years old.'.format(years_old))
+    if current_date == user_b_day and current_month == user_b_month:
+        print('Happy birthday, you are {} years old today!'.format(years_old))
     else:
         print('You are {} years old!'.format(years_old))
-
-
-
-
-
-
-
-
