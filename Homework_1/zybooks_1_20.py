@@ -10,7 +10,7 @@ if __name__ == '__main__':
 
     print('And {} cubed is {} !!'.format(user_num1, (user_num1 * user_num1 * user_num1)))
 
-    user_num2 = int(input('Enter another integer:'))
+    user_num2 = int(input('Enter another integer:\n'))
 
     print('{} + {} is {}'.format(user_num1, user_num2, (user_num1 + user_num2)))
 
