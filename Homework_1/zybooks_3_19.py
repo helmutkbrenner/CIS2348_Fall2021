@@ -20,8 +20,10 @@ if __name__ == '__main__':
 
     # FIXME (2): Calculate and output the amount of paint in gallons needed to paint the wall
     print('Paint needed: {:.2f} gallons'.format(wall_area / 350 ))
+
     # FIXME (3): Calculate and output the number of 1 gallon cans needed to paint the wall, rounded up to nearest integer
     print('Cans needed: {} can(s)\n'.format(math.ceil(wall_area / 350)))
+
     # FIXME (4): Calculate and output the total cost of paint can needed depending on color
     user_color = input('Choose a color to paint the wall:\n')
-    print('Cost of purchasing {} paint: ${}'.format(user_color, paint_colors[user_color]))
+    print('Cost of purchasing {} paint: ${}'.format(user_color, paint_colors[user_color] * (math.ceil(wall_area / 350))))
