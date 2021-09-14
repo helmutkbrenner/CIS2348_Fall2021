@@ -26,12 +26,12 @@ if __name__ == '__main__':
     # printing/calculating  the invoice using the dictionary and if statements to check for 'No service' option
     print('\nDavy\'s auto shop invoice\n')
     if service1 == '-':
-        print('Service 1: {}'.format(service1))
+        print('Service 1: {}'.format(services[service1]))
         print('Service 2: {}, ${}'.format(service2, services[service2]))
         print('\nTotal: ${}'.format(services[service2]))
     elif service2 == '-':
         print('Service 1: {}, ${}'.format(service1, services[service1]))
-        print('Service 2: {}'.format(service1))
+        print('Service 2: {}'.format(services[service2]))
         print('\nTotal: ${}'.format(services[service1]))
     else:
         print('Service 1: {}, ${}'.format(service1, services[service1]))
