@@ -26,5 +26,5 @@ if __name__ == '__main__':
 
     # FIXME (4): Calculate and output the total cost of paint can needed depending on color
     user_color = input('Choose a color to paint the wall:\n')
-    print('Cost of purchasing {} paint: ${}'.format(user_color,  # this indentation pattern is pycharms doing.
+    print('Cost of purchasing {} paint: ${}'.format(user_color,  # indentation pattern for readability
                                                     paint_colors[user_color] * (math.ceil(wall_area / 350))))
