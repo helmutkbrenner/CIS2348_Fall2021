@@ -4,8 +4,9 @@
 import datetime
 
 if __name__ == '__main__':
-    months_list = ['January','February','March','April','May','June','July','August','September','October',
-                   'November','December']
+    months_list = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October',
+                   'November', 'December']
+
     # this block takes user input line by line and loads it into a list of strings.
     line_list = []
     user_line_input = ''
@@ -16,4 +17,24 @@ if __name__ == '__main__':
         if user_line_input.count(' ') == 2 and user_line_input.count(',') == 1 and user_line_input.find('.') == -1:
             line_list.append(user_line_input)
     print(line_list)
-    # This next block of code will parse the dates ito a datetime object
+
+    # This next block of code will parse the dates into variables which can then be printed in the desired
+    # format.
+    final_list = []
+    for i in range(len(line_list)):
+        temp_year = int(line_list[i][-5:])
+
+        temp_month = line_list[i][:line_list[i].find(' ')]
+        temp_month_int = int(months_list.index(temp_month)+1)
+
+        temp_day = int(line_list[i][line_list[i].find(' '):line_list[i].find(',')])
+
+        date_constructed = datetime.datetime(temp_year, temp_month_int, temp_day)
+        current_date = datetime.datetime.now()
+
+        if date_constructed <= current_date:
+            final_list.append(date_constructed)
+
+        print(temp_year, ',', temp_month, ',', temp_month_int, ',', temp_day)
+
+    print(final_list)
