@@ -18,8 +18,7 @@ if __name__ == '__main__':
             line_list.append(user_line_input)
     print(line_list)
 
-    # This next block of code will parse the dates into variables which can then be printed in the desired
-    # format.
+    # This next block of code will parse the dates into variables which can then be compared to the current date.
     final_list = []
     for i in range(len(line_list)):
         temp_year = int(line_list[i][-5:])
@@ -29,12 +28,16 @@ if __name__ == '__main__':
 
         temp_day = int(line_list[i][line_list[i].find(' '):line_list[i].find(',')])
 
+        # This is where I use the datetime module to load up the parsed dates into an date object for easy formatting
+        # and comparison.
+
         date_constructed = datetime.datetime(temp_year, temp_month_int, temp_day)
         current_date = datetime.datetime.now()
 
         if date_constructed <= current_date:
-            final_list.append(date_constructed)
+            formatted_string = date_constructed.strftime("%#m/%#d/%Y")
+            final_list.append(formatted_string)
 
         print(temp_year, ',', temp_month, ',', temp_month_int, ',', temp_day)
-
-    print(final_list)
+    for i in range(len(final_list)):
+        print(final_list[i])
