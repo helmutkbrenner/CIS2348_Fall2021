@@ -17,7 +17,7 @@ if __name__ == '__main__':
     for i in range(len(line_list)):
         if line_list[i].count(' ') == 2 and line_list[i].count(',') == 1 and line_list[i].find('.') == -1:
             middle_list.append(line_list[i])
-    print(line_list)
+    print(middle_list)
 
     # This next block of code will parse the dates into variables which can then be compared to the current date.
     final_list = []
@@ -36,10 +36,12 @@ if __name__ == '__main__':
         current_date = datetime.datetime.now()
 
         if date_constructed <= current_date:
-            formatted_string = date_constructed.strftime("%#m/%#d/%Y")
+            formatted_string = date_constructed.strftime("%#m/%#d/%Y")  # This bit of code formats the dates
             final_list.append(formatted_string)
 
         print(temp_year, ',', temp_month, ',', temp_month_int, ',', temp_day)
-
-    for i in range(len(final_list)):
-        print(final_list[i])
+    # After loading the final_list with the parsed and formatted dates we write them to file.
+    with open('parsedDates.txt', 'w') as outputDates:
+        for i in range(len(final_list)):
+            outputDates.write(final_list[i])
+            outputDates.write('\n')
