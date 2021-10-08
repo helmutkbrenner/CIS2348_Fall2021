@@ -6,27 +6,28 @@ import datetime
 if __name__ == '__main__':
     months_list = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October',
                    'November', 'December']
+    # This block opens the file inputDates.txt and reads all the lines into a list of strings
+    file = open('inputDates.txt')
+    line_list = file.readlines()
+    file.close()
 
-    # this block takes user input line by line and loads it into a list of strings.
-    line_list = []
-    user_line_input = ''
-    while user_line_input != '-1':
-        user_line_input = str(input())
-        # these next statements check for incorrect date formats. I understand this is probably not the best way so
-        # I will continue to think about iterative improvements.
-        if user_line_input.count(' ') == 2 and user_line_input.count(',') == 1 and user_line_input.find('.') == -1:
-            line_list.append(user_line_input)
+    # these next statements check for incorrect date formats. I understand this is probably not the best way so
+    # I will continue to think about iterative improvements.
+    middle_list = []
+    for i in range(len(line_list)):
+        if line_list[i].count(' ') == 2 and line_list[i].count(',') == 1 and line_list[i].find('.') == -1:
+            middle_list.append(line_list[i])
     print(line_list)
 
     # This next block of code will parse the dates into variables which can then be compared to the current date.
     final_list = []
-    for i in range(len(line_list)):
-        temp_year = int(line_list[i][-5:])
+    for i in range(len(middle_list)):
+        temp_year = int(middle_list[i][-5:])
 
-        temp_month = line_list[i][:line_list[i].find(' ')]
+        temp_month = middle_list[i][:middle_list[i].find(' ')]
         temp_month_int = int(months_list.index(temp_month)+1)
 
-        temp_day = int(line_list[i][line_list[i].find(' '):line_list[i].find(',')])
+        temp_day = int(middle_list[i][middle_list[i].find(' '):middle_list[i].find(',')])
 
         # This is where I use the datetime module to load up the parsed dates into an date object for easy formatting
         # and comparison.
@@ -39,5 +40,6 @@ if __name__ == '__main__':
             final_list.append(formatted_string)
 
         print(temp_year, ',', temp_month, ',', temp_month_int, ',', temp_day)
+
     for i in range(len(final_list)):
         print(final_list[i])
