@@ -20,11 +20,13 @@ def exact_change(number):
     while running_total >= 1:
         running_total -= 1
         num_pennies += 1
-    return num_dollars, num_quarters, num_dimes, num_nickels, num_pennies+1
+    return num_dollars, num_quarters, num_dimes, num_nickels, num_pennies
 
 
 if __name__ == '__main__':
     user_input = float(input())
     if user_input <= 0:
         print('no change')
-    exact_change(user_input)
+    end_dollars, end_quarters, end_dimes, end_nickels, end_pennies = exact_change(user_input)
+
+
