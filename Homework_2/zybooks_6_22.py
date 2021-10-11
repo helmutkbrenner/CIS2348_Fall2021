@@ -13,6 +13,7 @@ if __name__ == '__main__':
 
     for x in range(-10, 11):
         for y in range(-10, 11):
+            #  it was much better to do the math separately, then compare results.
             answer1 = (int_A1 * x) + (int_B1 * y)
             answer2 = (int_A2 * x) + (int_B2 * y)
             if answer1 == int_C1 and answer2 == int_C2:
