@@ -34,6 +34,16 @@ if __name__ == '__main__':
               master_item_list[i].damaged)
     print('\n')
 
+    with open('PriceList.csv', 'r') as price_list_file:
+        line_reader1 = csv.reader(manufacturer_file, delimiter=',')
+        line_count1 = 0
+        list_of_prices = []
+        for row in line_reader1:
+            list_of_prices.append([row[0], row[1]])
+
+    for i in range(7):
+        print(list_of_prices[i][0], list_of_prices[i][1])
+
     #  This bit of code imports a special Operator function to reverse the lists according to common attributes
     from operator import attrgetter
     sorted_by_manufacturer = sorted(master_item_list, key=attrgetter('manufacturer'))
@@ -49,4 +59,3 @@ if __name__ == '__main__':
     for i in range(7):
         #  TEST should produce the list sorted by id
         print(sorted_by_id[i].item_id, sorted_by_id[i].manufacturer, sorted_by_id[i].item_type, sorted_by_id[i].damaged)
-
