@@ -15,6 +15,14 @@ class Item:
         self.service_date = service_date
 
 
+def list_sort_by_manufacturer(list):
+    # function takes a list of class objects.
+    initial_list = list
+    sorted_list = sorted(initial_list, key=initial_list.item_type, reverse=True)
+    print(sorted_list)
+    return sorted_list
+
+
 if __name__ == '__main__':
     with open('ManufacturerList.csv', 'r') as manufacturer_file:
         line_reader = csv.reader(manufacturer_file, delimiter=',')
@@ -33,3 +41,5 @@ if __name__ == '__main__':
           master_item_list[3].damaged)
     print(master_item_list[4].item_id, master_item_list[4].manufacturer, master_item_list[4].item_type,
           master_item_list[4].damaged)
+    print('\n')
+    list_sort_by_manufacturer(master_item_list)
