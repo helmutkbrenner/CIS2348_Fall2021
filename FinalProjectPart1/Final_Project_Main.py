@@ -21,10 +21,15 @@ if __name__ == '__main__':
         line_count = 0
         master_item_list = []  # fill a list with the custom class objects?
         for row in line_reader:
-            master_item_list.append(Item(row[0], row[1], row[2]))
+            master_item_list.append(Item(row[0], row[1], row[2], row[3]))
             line_count += 1
-    print(master_item_list[0].item_id, master_item_list[0].manufacturer, master_item_list[0].item_type)
-    print(master_item_list[1].item_id, master_item_list[1].manufacturer, master_item_list[1].item_type)
-    print(master_item_list[2].item_id, master_item_list[2].manufacturer, master_item_list[2].item_type)
-    print(master_item_list[3].item_id, master_item_list[3].manufacturer, master_item_list[3].item_type)
-    print(master_item_list[4].item_id, master_item_list[4].manufacturer, master_item_list[4].item_type)
+    print(master_item_list[0].item_id, master_item_list[0].manufacturer, master_item_list[0].item_type,
+          master_item_list[0].damaged)
+    print(master_item_list[1].item_id, master_item_list[1].manufacturer, master_item_list[1].item_type,
+          master_item_list[1].damaged)
+    print(master_item_list[2].item_id, master_item_list[2].manufacturer, master_item_list[2].item_type,
+          master_item_list[2].damaged)
+    print(master_item_list[3].item_id, master_item_list[3].manufacturer, master_item_list[3].item_type,
+          master_item_list[3].damaged)
+    print(master_item_list[4].item_id, master_item_list[4].manufacturer, master_item_list[4].item_type,
+          master_item_list[4].damaged)
