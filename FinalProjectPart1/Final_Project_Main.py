@@ -18,9 +18,8 @@ class Item:
 def list_sort_by_manufacturer(list):
     # function takes a list of class objects.
     initial_list = list
-    sorted_list = sorted(initial_list, key=initial_list.item_type, reverse=True)
-    print(sorted_list)
-    return sorted_list
+    initial_list.sort(key=lambda x: x.item_type)
+    return initial_list
 
 
 if __name__ == '__main__':
@@ -42,4 +41,6 @@ if __name__ == '__main__':
     print(master_item_list[4].item_id, master_item_list[4].manufacturer, master_item_list[4].item_type,
           master_item_list[4].damaged)
     print('\n')
-    list_sort_by_manufacturer(master_item_list)
+    sorted_list = list_sort_by_manufacturer(master_item_list)
+    for i in sorted_list:
+        print(sorted_list[i].item_type)
