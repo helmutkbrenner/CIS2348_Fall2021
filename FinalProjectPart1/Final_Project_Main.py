@@ -14,12 +14,8 @@ class Item:
         self.price = price
         self.service_date = service_date
 
-
-def list_sort_by_manufacturer(list):
-    # function takes a list of class objects.
-    initial_list = list
-    initial_list.sort(key=lambda x: x.item_type)
-    return initial_list
+    def __repr__(self):
+        return repr((sel.item_id, self.manufacturer, self.item_type, self.damaged))
 
 
 if __name__ == '__main__':
@@ -41,6 +37,21 @@ if __name__ == '__main__':
     print(master_item_list[4].item_id, master_item_list[4].manufacturer, master_item_list[4].item_type,
           master_item_list[4].damaged)
     print('\n')
-    sorted_list = list_sort_by_manufacturer(master_item_list)
-    for i in sorted_list:
-        print(sorted_list[i].item_type)
+    from operator import attrgetter
+    master_item_list = sorted(master_item_list, key=attrgetter('manufacturer'))
+    sorted_by_id = sorted(master_item_list, key=attrgetter('item_id'))
+
+    print(master_item_list[0].item_id, master_item_list[0].manufacturer, master_item_list[0].item_type,
+          master_item_list[0].damaged)
+    print(master_item_list[1].item_id, master_item_list[1].manufacturer, master_item_list[1].item_type,
+          master_item_list[1].damaged)
+    print(master_item_list[2].item_id, master_item_list[2].manufacturer, master_item_list[2].item_type,
+          master_item_list[2].damaged)
+    print(master_item_list[3].item_id, master_item_list[3].manufacturer, master_item_list[3].item_type,
+          master_item_list[3].damaged)
+    print(master_item_list[4].item_id, master_item_list[4].manufacturer, master_item_list[4].item_type,
+          master_item_list[4].damaged)
+    print('\n')
+
+    for i in range(5):
+        print(sorted_by_id[i].item_id)
