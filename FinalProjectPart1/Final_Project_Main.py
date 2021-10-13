@@ -14,6 +14,7 @@ class Item:
         self.price = price
         self.service_date = service_date
 
+
 def add_prices(master_list, price_pairs):
     # This function is used to take the list of class objects and "append" the price onto the correct item entry
     for k in range(len(master_list)):
@@ -34,10 +35,10 @@ def add_service_dates(master_list, service_dates):
 
 
 def print_tester(master_list):
-    for i in range(7):
+    for h in range(7):
         #  TEST should produce the list as is
-        print(master_list[i].item_id, master_list[i].manufacturer, master_list[i].item_type,
-              master_list[i].damaged, master_list[i].price, master_list[i].service_date)
+        print(master_list[h].item_id, master_list[h].manufacturer, master_list[h].item_type,
+              master_list[h].damaged, master_list[h].price, master_list[h].service_date)
     print('\n')
 
 
