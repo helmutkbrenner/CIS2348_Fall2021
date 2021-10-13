@@ -3,7 +3,7 @@ Part 1
 
 You will design a program that manages the inventory of an electronics store. You will need to use a
 number of concepts that you learned in class including: use of classes, use of dictionaries and input and
-output of comma delimeted csv files.
+output of comma delimited csv files.
 Input:
 
 a) ManufacturerList.csv -- contains items listed by row. Each row contains item ID,
