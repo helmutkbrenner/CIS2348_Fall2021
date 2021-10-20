@@ -68,7 +68,7 @@ if __name__ == '__main__':
     print('\n')
 
     with open('ServiceDatesList.csv', 'r') as service_dates_list_file:
-        #  Opens
+        #  Opens service dates list and saves the service dates list as a list of lists similar to before
         line_reader2 = csv.reader(service_dates_list_file, delimiter=',')
         line_count2 = 0
         service_dates_list = []
