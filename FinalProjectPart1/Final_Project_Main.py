@@ -2,6 +2,7 @@
 #  2037275  ##
 
 import csv
+import string
 
 
 class Item:
@@ -50,6 +51,11 @@ def get_item_type_list(class_list_by_type):
     return list_of_types
 
 
+def file_name_formatter(type_list):
+    formatted_list = [type.capitalize() + 'Inventory.csv' for type in type_list]
+    return formatted_list
+
+
 if __name__ == '__main__':
     with open('ManufacturerList.csv', 'r') as manufacturer_file:
         #  Opens the file and writes the contents to our class object Item, outputs to a master_item_list
@@ -78,22 +84,18 @@ if __name__ == '__main__':
             service_dates_list.append([row[0], row[1]])
             line_count2 += 1
 
-    #  This bit of code imports a special Operator function to reverse the lists according to common attributes
+    #  This bit of code imports a special Operator function to sort the lists according to common attributes
+    #  It even allows me to do two tier sorting, AMAZING.
     from operator import attrgetter
     sorted_by_manufacturer = sorted(master_item_list, key=attrgetter('manufacturer'))
     sorted_by_id = sorted(master_item_list, key=attrgetter('item_id'))
-    sorted_by_type = sorted(master_item_list, key=attrgetter('item_type'))
+    sorted_by_type = sorted(master_item_list, key=attrgetter('item_type', 'item_id'))
 
     #  Adds the prices to the correct items in their respective object classes
     add_prices(sorted_by_id, list_of_prices)
 
     #  Adds the service dates to the correct items in their respective object classes
     add_service_dates(sorted_by_id, service_dates_list)
-
-    # FullInventory.csv -- all the items listed by row with all their information . The items
-    # should be sorted alphabetically by manufacturer. Each row should contain item ID,
-    # manufacturer name, item type, price, service date, and list if it is damaged. The item
-    # attributes must appear in this order.
 
     with open('FullInventory.csv', 'w') as full_inventory:
         #  This piece of code creates the file FullInventory and writes the data in the required order.
@@ -104,13 +106,26 @@ if __name__ == '__main__':
                                   sorted_by_manufacturer[i].item_type, sorted_by_manufacturer[i].price,
                                   sorted_by_manufacturer[i].service_date, sorted_by_manufacturer[i].damaged])
 
-    # b. Item type Inventory list, i.e LaptopInventory.csv -- there should be a file for each item
-    # type and the item type needs to be in the file name. Each row of the file should contain
-    # item ID, manufacturer name, price, service date, and list if it is damaged. The items
-    # should be sorted by their item ID.
+    #  One list provides the formatting names for the file names, and the other provides a reference for all types
+    #  encountered in the input files. Allows for scalability for any number of item types... Theoretically.
+
+    ref_list_item_types = get_item_type_list(sorted_by_type)
+    formatted_file_names = file_name_formatter(ref_list_item_types)
+
+    for i in range(len(formatted_file_names)):
+        # This piece of code takes a list of formatted file names and makes the appropriate files from the appropriate
+        # data
+        with open(formatted_file_names[i], 'w') as type_file:
+            line_writer2 = csv.writer(type_file)
+            for q in range(len(sorted_by_type)):
+                if sorted_by_type[q].item_type == ref_list_item_types[i]:
+                    line_writer2.writerow([sorted_by_type[q].item_id, sorted_by_type[q].manufacturer,
+                                           sorted_by_type[q].price, sorted_by_type[q].service_date,
+                                           sorted_by_type[q].damaged])
 
     print_tester(master_item_list)
     print_tester(sorted_by_manufacturer)
     print_tester(sorted_by_id)
     print_tester(sorted_by_type)
-    print(get_item_type_list(sorted_by_type))
+    print(ref_list_item_types)
+    print(formatted_file_names)
