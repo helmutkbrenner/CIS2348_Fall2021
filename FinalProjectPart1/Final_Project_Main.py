@@ -42,6 +42,14 @@ def print_tester(master_list):
     print('\n')
 
 
+def get_item_type_list(class_list_by_type):
+    list_of_types = []
+    for p in range(len(class_list_by_type)):
+        if class_list_by_type[p].item_type not in list_of_types:
+            list_of_types.append(class_list_by_type[p].item_type)
+    return list_of_types
+
+
 if __name__ == '__main__':
     with open('ManufacturerList.csv', 'r') as manufacturer_file:
         #  Opens the file and writes the contents to our class object Item, outputs to a master_item_list
@@ -52,8 +60,6 @@ if __name__ == '__main__':
             master_item_list.append(Item(row[0], row[1], row[2], row[3]))
             line_count += 1
 
-    print_tester(master_item_list)
-
     with open('PriceList.csv', 'r') as price_list_file:
         #  Opens the Price list and saves the contents as a list of lists. The list is utilizes on line
         line_reader1 = csv.reader(price_list_file, delimiter=',')
@@ -62,10 +68,6 @@ if __name__ == '__main__':
         for row in line_reader1:
             list_of_prices.append([row[0], row[1]])
             line_count1 += 1
-
-    for i in range(7):
-        print(list_of_prices[i][0], list_of_prices[i][1])
-    print('\n')
 
     with open('ServiceDatesList.csv', 'r') as service_dates_list_file:
         #  Opens service dates list and saves the service dates list as a list of lists similar to before
@@ -76,36 +78,39 @@ if __name__ == '__main__':
             service_dates_list.append([row[0], row[1]])
             line_count2 += 1
 
-    for i in range(7):
-        print(service_dates_list[i][0], service_dates_list[i][1])
-    print('\n')
-
     #  This bit of code imports a special Operator function to reverse the lists according to common attributes
     from operator import attrgetter
     sorted_by_manufacturer = sorted(master_item_list, key=attrgetter('manufacturer'))
     sorted_by_id = sorted(master_item_list, key=attrgetter('item_id'))
-
-    print_tester(sorted_by_manufacturer)
-
-    print_tester(sorted_by_id)
+    sorted_by_type = sorted(master_item_list, key=attrgetter('item_type'))
 
     #  Adds the prices to the correct items in their respective object classes
     add_prices(sorted_by_id, list_of_prices)
 
-    print_tester(sorted_by_id)
-
     #  Adds the service dates to the correct items in their respective object classes
     add_service_dates(sorted_by_id, service_dates_list)
-
-    print_tester(sorted_by_id)
 
     # FullInventory.csv -- all the items listed by row with all their information . The items
     # should be sorted alphabetically by manufacturer. Each row should contain item ID,
     # manufacturer name, item type, price, service date, and list if it is damaged. The item
     # attributes must appear in this order.
 
-    print(sorted_by_manufacturer is sorted_by_id)
+    with open('FullInventory.csv', 'w') as full_inventory:
+        #  This piece of code creates the file FullInventory and writes the data in the required order.
+        line_writer = csv.writer(full_inventory)
+
+        for i in range(len(sorted_by_manufacturer)):
+            line_writer.writerow([sorted_by_manufacturer[i].item_id, sorted_by_manufacturer[i].manufacturer,
+                                  sorted_by_manufacturer[i].item_type, sorted_by_manufacturer[i].price,
+                                  sorted_by_manufacturer[i].service_date, sorted_by_manufacturer[i].damaged])
+
+    # b. Item type Inventory list, i.e LaptopInventory.csv -- there should be a file for each item
+    # type and the item type needs to be in the file name. Each row of the file should contain
+    # item ID, manufacturer name, price, service date, and list if it is damaged. The items
+    # should be sorted by their item ID.
+
     print_tester(master_item_list)
     print_tester(sorted_by_manufacturer)
     print_tester(sorted_by_id)
-
+    print_tester(sorted_by_type)
+    print(get_item_type_list(sorted_by_type))
