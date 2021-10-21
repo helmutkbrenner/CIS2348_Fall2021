@@ -144,16 +144,7 @@ if __name__ == '__main__':
     today_date = datetime.now()
     formatted_today_date = today_date.strftime('%m/%d/%y')
 
-    with open('PastServiceInventory.csv', 'w') as service_inventory:
-        line_writer3 = csv.writer(service_inventory)
-
-        for m in range(len(sorted_by_service_date)):
-            item_service_date = datetime.strptime(sorted_by_service_date[m].service_date, '%m/%d/%y' )
-            if formatted_today_date > item_service_date:
-                line_writer3.writerow([sorted_by_service_date[m].item_id, sorted_by_service_date[m].manufacturer,
-                                       sorted_by_service_date[m].item_type, sorted_by_service_date[m].price,
-                                       sorted_by_service_date[m].service_date, sorted_by_service_date[m].damaged])
-        line_writer3.writerow(['None'])
+    #  if formatted_today_date > item_service_date:
 
     print_tester(master_item_list)
     print_tester(sorted_by_manufacturer)
