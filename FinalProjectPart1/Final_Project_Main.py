@@ -140,17 +140,27 @@ if __name__ == '__main__':
     # name, item type, price, service date, and list if it is damaged. The items must appear in
     # the order of service date from oldest to most recent.
 
+    # This piece of code will scan the sorted class objects by service date and add them to a list if they are past due.
+    # It will also add a class object to the list if the service date and current date are the same.
     from datetime import datetime
     today_date = datetime.now()
-    formatted_today_date = today_date.strftime('%m/%d/%y')
+    past_serv_date_list = []
 
-    #  if formatted_today_date > item_service_date:
+    for m in range(len(sorted_by_service_date)):
+        temp_date_object = datetime.strptime(sorted_by_service_date[m].service_date, '%m/%d/%Y')
+        if temp_date_object < today_date:
+            past_serv_date_list.append(sorted_by_service_date[m])
+
+    # Here we use a csv writer to write the appropriate attributes from the list of class objects we parsed above.
+    with open('PastServiceInventory.csv', 'w') as service_dates_file:
+        line_writer3 = csv.writer(service_dates_file)
+        for o in range(len(past_serv_date_list)):
+            line_writer3.writerow([past_serv_date_list[o].item_id, past_serv_date_list[o].manufacturer,
+                                   past_serv_date_list[o].item_type, past_serv_date_list[o].price,
+                                   past_serv_date_list[o].service_date, past_serv_date_list[o].damaged])
 
     print_tester(master_item_list)
     print_tester(sorted_by_manufacturer)
     print_tester(sorted_by_id)
     print_tester(sorted_by_type)
-    print(ref_list_item_types)
-    print(formatted_file_names)
     print_tester(sorted_by_service_date)
-    print(formatted_today_date, type(formatted_today_date))
