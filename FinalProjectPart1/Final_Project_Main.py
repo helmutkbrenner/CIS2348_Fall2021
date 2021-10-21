@@ -97,7 +97,7 @@ if __name__ == '__main__':
     sorted_by_manufacturer = sorted(master_item_list, key=attrgetter('manufacturer'))
     sorted_by_id = sorted(master_item_list, key=attrgetter('item_id'))
     sorted_by_type = sorted(master_item_list, key=attrgetter('item_type', 'item_id'))
-    sorted_by_service_date = sorted(master_item_list, key=attrgetter('service_date'))
+    sorted_by_service_date = sorted(master_item_list, key=attrgetter('service_date'), reverse=True)
 
     # a. FullInventory.csv -- all the items listed by row with all their information . The items
     # should be sorted alphabetically by manufacturer. Each row should contain item ID,
@@ -140,9 +140,26 @@ if __name__ == '__main__':
     # name, item type, price, service date, and list if it is damaged. The items must appear in
     # the order of service date from oldest to most recent.
 
+    from datetime import datetime
+    today_date = datetime.now()
+    formatted_today_date = today_date.strftime('%m/%d/%y')
+
+    with open('PastServiceInventory.csv', 'w') as service_inventory:
+        line_writer3 = csv.writer(service_inventory)
+
+        for m in range(len(sorted_by_service_date)):
+            item_service_date = datetime.strptime(sorted_by_service_date[m].service_date, '%m/%d/%y' )
+            if formatted_today_date > item_service_date:
+                line_writer3.writerow([sorted_by_service_date[m].item_id, sorted_by_service_date[m].manufacturer,
+                                       sorted_by_service_date[m].item_type, sorted_by_service_date[m].price,
+                                       sorted_by_service_date[m].service_date, sorted_by_service_date[m].damaged])
+        line_writer3.writerow(['None'])
+
     print_tester(master_item_list)
     print_tester(sorted_by_manufacturer)
     print_tester(sorted_by_id)
     print_tester(sorted_by_type)
     print(ref_list_item_types)
     print(formatted_file_names)
+    print_tester(sorted_by_service_date)
+    print(formatted_today_date, type(formatted_today_date))
