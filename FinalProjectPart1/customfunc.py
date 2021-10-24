@@ -1,6 +1,17 @@
 #  Helmut Brenner  #
 #  2037275  #
 
+class Item:
+    #  Making an item class with the following attributes and methods:
+    def __init__(self, item_id, manufacturer, item_type, damaged='undamaged', price=0, service_date=''):
+        self.item_id = item_id
+        self.manufacturer = manufacturer
+        self.item_type = item_type
+        self.damaged = damaged
+        self.price = price
+        self.service_date = service_date
+
+
 def add_prices(master_list, price_pairs):
     # This function is used to take the list of class objects and "append" the price onto the correct item entry. Upon
     #  second looks, I know these search algos are NOT efficient, maybe room for improvement on part 2 of the project?
