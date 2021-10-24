@@ -3,7 +3,6 @@
 
 import csv
 import string
-import customfunc
 
 
 class Item:
@@ -167,8 +166,8 @@ if __name__ == '__main__':
     # This is where we find damaged items and write them to their own file.
     with open('DamagedInventory.csv', 'w') as damaged_items_file:
         line_writer4 = csv.writer(damaged_items_file)
-        for z in range(len(sorted_by_price)):
-            if sorted_by_price[z].damaged != '':
-                line_writer4.writerow([sorted_by_price[z].item_id, sorted_by_price[z].manufacturer,
-                                       sorted_by_price[z].item_type, sorted_by_price[z].price,
-                                       sorted_by_price[z].service_date])
+        for o in range(len(sorted_by_price)):
+            if sorted_by_price[o].damaged != '':
+                line_writer4.writerow([sorted_by_price[o].item_id, sorted_by_price[o].manufacturer,
+                                       sorted_by_price[o].item_type, sorted_by_price[o].price,
+                                       sorted_by_price[o].service_date])
