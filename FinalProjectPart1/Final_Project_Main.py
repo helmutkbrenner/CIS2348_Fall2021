@@ -48,7 +48,7 @@ if __name__ == '__main__':
     sorted_by_id = sorted(master_item_list, key=attrgetter('item_id'))
     sorted_by_type = sorted(master_item_list, key=attrgetter('item_type', 'item_id'))
     sorted_by_service_date = sorted(master_item_list, key=attrgetter('service_date'), reverse=True)
-    sorted_by_price = sorted(master_item_list, key=attrgetter('price'))
+    sorted_by_price = sorted(master_item_list, key=attrgetter('price'), reverse=True)
 
     # a. FullInventory.csv -- all the items listed by row with all their information . The items
     # should be sorted alphabetically by manufacturer. Each row should contain item ID,
@@ -113,6 +113,7 @@ if __name__ == '__main__':
     # d. DamagedInventory.csv –all items that are damaged. Each row should contain : item ID,
     # manufacturer name, item type, price, and service date. The items must appear in the
     # order of most expensive to least expensive.
+
     # This is where we find damaged items and write them to their own file.
     with open('DamagedInventory.csv', 'w') as damaged_items_file:
         line_writer4 = csv.writer(damaged_items_file)
