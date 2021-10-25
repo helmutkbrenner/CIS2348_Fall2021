@@ -8,7 +8,7 @@ import customfunc
 
 if __name__ == '__main__':
     with open('ManufacturerList.csv', 'r') as manufacturer_file:
-        #  Opens the file and writes the contents to our class object Item, outputs to a master_item_list
+        #  Opens the file and writes the contents to our class constructor Item, outputs to a master_item_list
         line_reader = csv.reader(manufacturer_file, delimiter=',')
         line_count = 0
         master_item_list = []
@@ -17,7 +17,7 @@ if __name__ == '__main__':
             line_count += 1
 
     with open('PriceList.csv', 'r') as price_list_file:
-        #  Opens the Price list and saves the contents as a list of lists. The list is utilizes on line
+        #  Opens the Price list and saves the contents as a list of lists. The list is utilized in the add prices func.
         line_reader1 = csv.reader(price_list_file, delimiter=',')
         line_count1 = 0
         list_of_prices = []
