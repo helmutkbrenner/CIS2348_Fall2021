@@ -19,7 +19,7 @@ def add_prices(master_list, price_pairs):
         j = 0
         while master_list[k].item_id != price_pairs[j][0]:
             j += 1
-        master_list[k].price = price_pairs[j][1]
+        master_list[k].price = int(price_pairs[j][1])
     return master_list
 
 

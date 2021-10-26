@@ -125,6 +125,8 @@ if __name__ == '__main__':
     # manufacturer name, item type, price, and service date. The items must appear in the
     # order of most expensive to least expensive.
 
+    customfunc.print_tester(sorted_by_price)
+
     # This is where we find damaged items and write them to their own file.
     with open('DamagedInventory.csv', 'w') as damaged_items_file:
         line_writer4 = csv.writer(damaged_items_file)
@@ -132,4 +134,4 @@ if __name__ == '__main__':
             if sorted_by_price[o].damaged != '':
                 line_writer4.writerow([sorted_by_price[o].item_id, sorted_by_price[o].manufacturer,
                                        sorted_by_price[o].item_type, sorted_by_price[o].price,
-                                       sorted_by_price[o].service_date])
+                                       sorted_by_price[o].service_date.strftime('%m/%d/%Y')])
