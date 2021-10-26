@@ -93,6 +93,9 @@ if __name__ == '__main__':
 
     # This piece of code will scan the sorted class objects by service date and add them to a list if they are past due.
     # It will also add a class object to the list if the service date and current date are the same.
+
+    customfunc.print_tester(sorted_by_service_date)
+
     from datetime import datetime
     today_date = datetime.now()
     past_serv_date_list = []
