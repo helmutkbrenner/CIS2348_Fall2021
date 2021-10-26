@@ -47,7 +47,6 @@ if __name__ == '__main__':
     sorted_by_manufacturer = sorted(master_item_list, key=attrgetter('manufacturer'))
     sorted_by_id = sorted(master_item_list, key=attrgetter('item_id'))
     sorted_by_type = sorted(master_item_list, key=attrgetter('item_type', 'item_id'))
-    sorted_by_service_date = sorted(master_item_list, key=attrgetter('service_date'), reverse=True)
     sorted_by_price = sorted(master_item_list, key=attrgetter('price'), reverse=True)
 
     # a. FullInventory.csv -- all the items listed by row with all their information . The items
@@ -94,24 +93,33 @@ if __name__ == '__main__':
     # This piece of code will scan the sorted class objects by service date and add them to a list if they are past due.
     # It will also add a class object to the list if the service date and current date are the same.
 
-    customfunc.print_tester(sorted_by_service_date)
-
     from datetime import datetime
     today_date = datetime.now()
     past_serv_date_list = []
 
-    for m in range(len(sorted_by_service_date)):
-        temp_date_object = datetime.strptime(sorted_by_service_date[m].service_date, '%m/%d/%Y')
-        if temp_date_object < today_date:
-            past_serv_date_list.append(sorted_by_service_date[m])
+    #  This piece of code checks to make sure that the service date is before today's date and transforms the date into
+    #  a datetime object.
+    for m in range(len(sorted_by_price)):
+        sorted_by_price[m].service_date = datetime.strptime(sorted_by_price[m].service_date, '%m/%d/%Y')
+        if sorted_by_price[m].service_date < today_date:
+            past_serv_date_list.append(sorted_by_price[m])
 
-    # Here we use a csv writer to write the appropriate attributes from the list of class objects we parsed above.
+    customfunc.print_tester(past_serv_date_list)
+
+    # Sort the list of class objects by date, once the dates are datetime objects the comparison is done by sorted()
+    sorted_dates_list = sorted(past_serv_date_list, key=attrgetter('service_date'))
+
+    customfunc.print_tester(sorted_dates_list)
+
+    # Here we use a csv writer to write the appropriate attributes from the list of class objects we just sorted above.
+    # I used the datetime formatting codes to output the correctly formatted dates to the csv file.
     with open('PastServiceInventory.csv', 'w') as service_dates_file:
         line_writer3 = csv.writer(service_dates_file)
-        for o in range(len(past_serv_date_list)):
-            line_writer3.writerow([past_serv_date_list[o].item_id, past_serv_date_list[o].manufacturer,
-                                   past_serv_date_list[o].item_type, past_serv_date_list[o].price,
-                                   past_serv_date_list[o].service_date, past_serv_date_list[o].damaged])
+        for o in range(len(sorted_dates_list)):
+            line_writer3.writerow([sorted_dates_list[o].item_id, sorted_dates_list[o].manufacturer,
+                                   sorted_dates_list[o].item_type, sorted_dates_list[o].price,
+                                   sorted_dates_list[o].service_date.strftime('%m/%d/%Y'),
+                                   sorted_dates_list[o].damaged])
 
     # d. DamagedInventory.csv –all items that are damaged. Each row should contain : item ID,
     # manufacturer name, item type, price, and service date. The items must appear in the
