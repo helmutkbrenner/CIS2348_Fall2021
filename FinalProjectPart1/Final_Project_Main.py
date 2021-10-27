@@ -49,11 +49,6 @@ if __name__ == '__main__':
     sorted_by_type = sorted(master_item_list, key=attrgetter('item_type', 'item_id'))
     sorted_by_price = sorted(master_item_list, key=attrgetter('price'), reverse=True)
 
-    # a. FullInventory.csv -- all the items listed by row with all their information . The items
-    # should be sorted alphabetically by manufacturer. Each row should contain item ID,
-    # manufacturer name, item type, price, service date, and list if it is damaged. The item
-    # attributes must appear in this order.
-
     with open('FullInventory.csv', 'w') as full_inventory:
         #  This piece of code creates the file FullInventory and writes the data in the required order.
         line_writer = csv.writer(full_inventory)
@@ -62,11 +57,6 @@ if __name__ == '__main__':
             line_writer.writerow([sorted_by_manufacturer[i].item_id, sorted_by_manufacturer[i].manufacturer,
                                   sorted_by_manufacturer[i].item_type, sorted_by_manufacturer[i].price,
                                   sorted_by_manufacturer[i].service_date, sorted_by_manufacturer[i].damaged])
-
-    # b. Item type Inventory list, i.e LaptopInventory.csv -- there should be a file for each item
-    # type and the item type needs to be in the file name. Each row of the file should contain
-    # item ID, manufacturer name, price, service date, and list if it is damaged. The items
-    # should be sorted by their item ID.
 
     #  One list provides the formatting names for the file names, and the other provides a reference for all types
     #  encountered in the input files. Allows for scalability for any number of item types... Theoretically.
@@ -84,11 +74,6 @@ if __name__ == '__main__':
                     line_writer2.writerow([sorted_by_type[q].item_id, sorted_by_type[q].manufacturer,
                                            sorted_by_type[q].price, sorted_by_type[q].service_date,
                                            sorted_by_type[q].damaged])
-
-    # c. PastServiceDateInventory.csv – all the items that are past the service date on the day
-    # the program is actually executed. Each row should contain: item ID, manufacturer
-    # name, item type, price, service date, and list if it is damaged. The items must appear in
-    # the order of service date from oldest to most recent.
 
     # This piece of code will scan the sorted class objects by service date and add them to a list if they are past due.
     # It will also add a class object to the list if the service date and current date are the same.
@@ -116,10 +101,6 @@ if __name__ == '__main__':
                                    sorted_dates_list[o].item_type, sorted_dates_list[o].price,
                                    sorted_dates_list[o].service_date.strftime('%m/%d/%Y'),
                                    sorted_dates_list[o].damaged])
-
-    # d. DamagedInventory.csv –all items that are damaged. Each row should contain : item ID,
-    # manufacturer name, item type, price, and service date. The items must appear in the
-    # order of most expensive to least expensive.
 
     # This is where we find damaged items and write them to their own file.
     with open('DamagedInventory.csv', 'w') as damaged_items_file:
