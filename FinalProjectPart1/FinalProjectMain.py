@@ -94,7 +94,7 @@ if __name__ == '__main__':
 
     # Here we use a csv writer to write the appropriate attributes from the list of class objects we just sorted above.
     # I used the datetime formatting codes to output the correctly formatted dates to the csv file.
-    with open('PastServiceInventory.csv', 'w') as service_dates_file:
+    with open('PastServiceDateInventory.csv', 'w') as service_dates_file:
         line_writer3 = csv.writer(service_dates_file)
         for o in range(len(sorted_dates_list)):
             line_writer3.writerow([sorted_dates_list[o].item_id, sorted_dates_list[o].manufacturer,
