@@ -3,7 +3,7 @@
 
 import csv
 import string
-import customfunc
+import FinalProjectFunc
 
 
 if __name__ == '__main__':
@@ -13,7 +13,7 @@ if __name__ == '__main__':
         line_count = 0
         master_item_list = []
         for row in line_reader:
-            master_item_list.append(customfunc.Item(row[0], row[1], row[2], row[3]))
+            master_item_list.append(FinalProjectFunc.Item(row[0], row[1], row[2], row[3]))
             line_count += 1
 
     with open('PriceList.csv', 'r') as price_list_file:
@@ -35,10 +35,10 @@ if __name__ == '__main__':
             line_count2 += 1
 
     #  Adds the prices to the correct items in their respective object classes
-    customfunc.add_prices(master_item_list, list_of_prices)
+    FinalProjectFunc.add_prices(master_item_list, list_of_prices)
 
     #  Adds the service dates to the correct items in their respective object classes
-    customfunc.add_service_dates(master_item_list, service_dates_list)
+    FinalProjectFunc.add_service_dates(master_item_list, service_dates_list)
 
     #  This bit of code imports a special Operator function to sort the lists according to common attributes
     #  It even allows me to do two tier sorting, AMAZING.
@@ -61,8 +61,8 @@ if __name__ == '__main__':
     #  One list provides the formatting names for the file names, and the other provides a reference for all types
     #  encountered in the input files. Allows for scalability for any number of item types... Theoretically.
 
-    ref_list_item_types = customfunc.get_item_type_list(sorted_by_type)
-    formatted_file_names = customfunc.file_name_formatter(ref_list_item_types)
+    ref_list_item_types = FinalProjectFunc.get_item_type_list(sorted_by_type)
+    formatted_file_names = FinalProjectFunc.file_name_formatter(ref_list_item_types)
 
     for i in range(len(formatted_file_names)):
         # This piece of code takes a list of formatted file names and makes the appropriate files from the appropriate
@@ -83,7 +83,7 @@ if __name__ == '__main__':
     past_serv_date_list = []
 
     #  This piece of code checks to make sure that the service date is before today's date and transforms the date into
-    #  a datetime object. Next time this will be done by the add_service_dates function?
+    #  a datetime object.
     for m in range(len(sorted_by_price)):
         sorted_by_price[m].service_date = datetime.strptime(sorted_by_price[m].service_date, '%m/%d/%Y')
         if sorted_by_price[m].service_date < today_date:
