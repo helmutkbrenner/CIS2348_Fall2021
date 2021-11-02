@@ -29,10 +29,10 @@ if __name__ == '__main__':
     #  Use instance methods to create class object, then calculate cal with class method.
     food_tester = FoodItem()
     food1 = FoodItem(user_input[0], user_input[1], user_input[2], user_input[3])
-    cal = food1.get_calories(int(user_input[4]))
+    cal = food1.get_calories(user_input[4])
 
     # Print required information.
     food_tester.print_info()
-    print('Number of calories for 1.00 serving(s): 0.00\n')
+    print('Number of calories for {:.2f} serving(s): 0.00\n'.format(user_input[4]))
     food1.print_info()
     print('Number of calories for {:.2f} serving(s): {:.2f}'.format(user_input[4], cal))
