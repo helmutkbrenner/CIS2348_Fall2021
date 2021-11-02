@@ -30,4 +30,4 @@ if __name__ == '__main__':
     item1.print_item_cost()
     item2.print_item_cost()
 
-    print('Total: ${:.0f}'.format((item1.item_price * item1.item_quantity) + (item2.item_price * item2.item_quantity)))
+    print('\nTotal: ${:.0f}'.format((item1.item_price * item1.item_quantity) + (item2.item_price * item2.item_quantity)))
