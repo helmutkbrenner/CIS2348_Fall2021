@@ -22,13 +22,14 @@ class FoodItem:
 
 if __name__ == '__main__':
     # Get user inputs
-    user_input = []
-    for i in range(5):
-        user_input.append(input())
+    user_input = [str(input())]
+    for i in range(4):
+        user_input.append(float(input()))
 
-    food1 = FoodItem(user_input[0], int(user_input[1]), int(user_input[2]), int(user_input[3]))
+    #  Use instance methods to create class object, then calculate cal with class method.
+    food1 = FoodItem(user_input[0], user_input[1], user_input[2], user_input[3])
     cal = food1.get_calories(int(user_input[4]))
-    print(cal)
 
+    # Print required information.
     food1.print_info()
-    print('Number of calories for {} serving(s): {}'.format(user_input[4], cal))
+    print('Number of calories for {} serving(s): {:.2f}'.format(user_input[4], cal))
