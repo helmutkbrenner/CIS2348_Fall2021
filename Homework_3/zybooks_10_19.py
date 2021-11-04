@@ -52,17 +52,63 @@ class ShoppingCart:
         if not found_flag:
             print('Item not found in cart. Nothing modified')
 
+    # returns the quantity of all items in the cart
+    def get_num_items_in_cart(self):
+        total_items = 0
+        for i in range(len(self.cart_items)):
+            total_items += self.cart_items[i].item_quantity
+        return total_items
+
+    #  Retrieve and totals the cost of items in the cart according to the quantity chosen
+    def get_cost_of_cart(self):
+        total_cost = 0
+        for i in range(len(self.cart_items)):
+            total_cost += (self.cart_items[i].item_quantity * self.cart_items[i].item_price)
+        return total_cost
+
+    # uses the function get_cost_of_cart and then prints it. Alternate message if cart is empty.
+    def print_total(self):
+        if self.get_cost_of_cart() == 0:
+            print('SHOPPING CART IS EMPTY')
+        else:
+            print('{}\'s Shopping Cart - {}'.format(self.customer_name, self.current_date))
+            print('Number of Items: {}\n'.format(self.get_num_items_in_cart()))
+
+            for k in range(len(self.cart_items)):
+                print('{} {} @ ${:.0f} = ${:.0f}'.format(self.cart_items[k].item_name, self.cart_items[k].item_quantity,
+                                                         self.cart_items[k].item_price,
+                                                         (self.cart_items[k].item_price * self.cart_items[k].item_quantity)))
+            print('\nTotal: {}'.format(self.get_cost_of_cart()))
+
+    # Prints a list of the items in the cart and their quantities.
+    def print_descriptions(self):
+        print('{}\'s Shopping Cart - {}'.format(self.customer_name, self.current_date))
+        print('\nItem Descriptions')
+        for j in range(len(self.cart_items)):
+            print('{}: {}'.format(self.cart_items[j].item_name, self.cart_items[j].item_description))
+
+
+def print_menu():
+    #  Prints the main menu
+    print('MENU')
+    print('a - Add item to cart')
+    print('r - Remove item from cart')
+    print('c - Change item quantity')
+    print('i - Output items\' descriptions')
+    print('o - Output shopping cart')
+    print('q - Quit')
+    print('\nChoose an option:')
+
 
 if __name__ == '__main__':
-    test1 = ItemToPurchase('Nike Romaleos', 189, 2, 'Volt color, Weightlifting shoes')
-    test2 = ItemToPurchase('Chocolate Chips', 3, 5, 'Semi-Sweet')
-    test3 = ItemToPurchase('RTX 3090', 1399, 1, 'Top of the line graphics card')
+    #  Get customer input for shopping cart object
+    customer_input_name = str(input('Enter customer\'s name:\n'))
+    customer_input_date = str(input('Enter today\'s date:\n'))
 
-    shopping_cart1 = ShoppingCart('Helmut Brenner', 'November 2, 2021')
-    shopping_cart1.add_item(test1)
-    shopping_cart1.add_item(test2)
-    shopping_cart1.add_item(test3)
+    #  Output the information given
+    print('\nCustomer name: {}'.format(customer_input_name))
+    print('Today\'s date: {}'.format(customer_input_date))
 
-    print(shopping_cart1.cart_items)
-    shopping_cart1.modify_item(shopping_cart1.cart_items[2], 5)
-    print(shopping_cart1.cart_items[2].item_quantity)
+    # Make a shopping class object with given info
+    #  user_command = ''
+    #  while user_command != 'q':
