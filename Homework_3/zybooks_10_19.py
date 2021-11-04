@@ -96,8 +96,7 @@ def print_menu():
     print('c - Change item quantity')
     print('i - Output items\' descriptions')
     print('o - Output shopping cart')
-    print('q - Quit')
-    print('\nChoose an option:')
+    print('q - Quit\n')
 
 
 if __name__ == '__main__':
@@ -107,7 +106,7 @@ if __name__ == '__main__':
 
     #  Output the information given
     print('\nCustomer name: {}'.format(customer_input_name))
-    print('Today\'s date: {}'.format(customer_input_date))
+    print('Today\'s date: {}\n'.format(customer_input_date))
 
     #  Make a shopping class object with given info
     shopping_cart1 = ShoppingCart(customer_input_name, customer_input_date)
@@ -115,7 +114,7 @@ if __name__ == '__main__':
     user_command = ''
     while user_command != 'q':
         print_menu()
-        user_command = str(input())
+        user_command = str(input('Choose an option:\n'))
         if user_command == 'a':
             print('ADD ITEM TO CART')
             item_name1 = str(input('Enter the item name:\n'))
@@ -138,4 +137,6 @@ if __name__ == '__main__':
             desired_quantity = int(input('Enter the new quantity:'))
             #  TODO
             #  Fix the modify item method to accept a name of an item and then it should be basically done.
-            shopping_cart1.modify_item()
+            #  shopping_cart1.modify_item()
+        else:
+            continue
