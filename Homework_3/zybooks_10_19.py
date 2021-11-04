@@ -109,6 +109,33 @@ if __name__ == '__main__':
     print('\nCustomer name: {}'.format(customer_input_name))
     print('Today\'s date: {}'.format(customer_input_date))
 
-    # Make a shopping class object with given info
-    #  user_command = ''
-    #  while user_command != 'q':
+    #  Make a shopping class object with given info
+    shopping_cart1 = ShoppingCart(customer_input_name, customer_input_date)
+
+    user_command = ''
+    while user_command != 'q':
+        print_menu()
+        user_command = str(input())
+        if user_command == 'a':
+            print('ADD ITEM TO CART')
+            item_name1 = str(input('Enter the item name:\n'))
+            item_price1 = int(input('Enter the item price:\n'))
+            item_quantity1 = int(input('Enter the item quantity:\n'))
+            item_description1 = str(input('Enter the item description:\n'))
+            shopping_cart1.add_item((ItemToPurchase(item_name1, item_price1, item_quantity1, item_description1)))
+        elif user_command == 'o':
+            print('OUTPUT SHOPPING CART')
+            shopping_cart1.print_total()
+        elif user_command == 'i':
+            print('OUTPUT ITEMS\' DESCRIPTION')
+            shopping_cart1.print_descriptions()
+        elif user_command == 'r':
+            print('REMOVE ITEM FROM CART')
+            shopping_cart1.remove_item(str(input('Enter name of item to remove:\n')))
+        elif user_command == 'c':
+            print('CHANGE ITEM QUANTITY')
+            item_name3 = str(input('Enter the item name:'))
+            desired_quantity = int(input('Enter the new quantity:'))
+            #  TODO
+            #  Fix the modify item method to accept a name of an item and then it should be basically done.
+            shopping_cart1.modify_item()
