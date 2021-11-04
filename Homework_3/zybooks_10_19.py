@@ -30,31 +30,36 @@ class ShoppingCart:
         self.cart_items.append(item_object)
 
     def remove_item(self, item_name):
-        # TODO
+        found_flag = False
         for i in range(len(self.cart_items)):
             if item_name == self.cart_items[i].item_name:
                 del self.cart_items[i]
+                found_flag = True
                 break
+        if not found_flag:
             print('Item not found in cart. Nothing removed.')
+
+    def modify_item(self, item_object, new_quantity):
+        found_flag = False
+        for i in range(len(self.cart_items)):
+            if item_object == self.cart_items[i]:
+                self.cart_items[i].item_quantity = new_quantity
+                found_flag = True
+                break
+        if not found_flag:
+            print('Item not found in cart. Nothing modified')
 
 
 if __name__ == '__main__':
     test1 = ItemToPurchase('Nike Romaleos', 189, 2, 'Volt color, Weightlifting shoes')
     test2 = ItemToPurchase('Chocolate Chips', 3, 5, 'Semi-Sweet')
-
-    test1.print_item_description()
-    test1.print_item_cost()
-    test2.print_item_description()
-    test2.print_item_cost()
+    test3 = ItemToPurchase('RTX 3090', 1399, 1, 'Top of the line graphics card')
 
     shopping_cart1 = ShoppingCart('Helmut Brenner', 'November 2, 2021')
     shopping_cart1.add_item(test1)
     shopping_cart1.add_item(test2)
+    shopping_cart1.add_item(test3)
 
     print(shopping_cart1.cart_items)
-
-    shopping_cart1.remove_item('Chocolate Chips')
-
-    print(shopping_cart1.cart_items[0].item_name)
-
-    print(shopping_cart1.cart_items)
+    shopping_cart1.modify_item(shopping_cart1.cart_items[2], 5)
+    print(shopping_cart1.cart_items[2].item_quantity)
