@@ -26,9 +26,11 @@ class ShoppingCart:
         self.current_date = current_date
         self.cart_items = cart_items
 
+    #  takes a item object and adds it to the shopping cart cart_item list.
     def add_item(self, item_object):
         self.cart_items.append(item_object)
 
+    #  Takes a name of an item and finds/removes it from the cart.
     def remove_item(self, item_name):
         found_flag = False
         for i in range(len(self.cart_items)):
@@ -39,6 +41,7 @@ class ShoppingCart:
         if not found_flag:
             print('Item not found in cart. Nothing removed.')
 
+    #  similar logic to the above function, takes a object item and a new quantity and assigns the quantity if found.
     def modify_item(self, item_object, new_quantity):
         found_flag = False
         for i in range(len(self.cart_items)):
