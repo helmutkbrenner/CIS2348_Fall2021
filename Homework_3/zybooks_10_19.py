@@ -111,10 +111,11 @@ if __name__ == '__main__':
     #  Make a shopping class object with given info
     shopping_cart1 = ShoppingCart(customer_input_name, customer_input_date)
 
+    # Made a list of approved inputs and initialized a variable to hold the user command
     user_command = ''
+    print_menu()
     while user_command != 'q':
-        print_menu()
-        user_command = str(input('Choose an option:\n'))
+        user_command = str(input('Choose an option:'))
         if user_command == 'a':
             print('ADD ITEM TO CART')
             item_name1 = str(input('Enter the item name:\n'))
@@ -122,15 +123,23 @@ if __name__ == '__main__':
             item_quantity1 = int(input('Enter the item quantity:\n'))
             item_description1 = str(input('Enter the item description:\n'))
             shopping_cart1.add_item((ItemToPurchase(item_name1, item_price1, item_quantity1, item_description1)))
+            print_menu()
+            continue
         elif user_command == 'o':
             print('OUTPUT SHOPPING CART')
             shopping_cart1.print_total()
+            print_menu()
+            continue
         elif user_command == 'i':
             print('OUTPUT ITEMS\' DESCRIPTION')
             shopping_cart1.print_descriptions()
+            print_menu()
+            continue
         elif user_command == 'r':
-            print('REMOVE ITEM FROM CART')
+            print('REMOVED ITEM FROM CART')
             shopping_cart1.remove_item(str(input('Enter name of item to remove:\n')))
+            print_menu()
+            continue
         elif user_command == 'c':
             print('CHANGE ITEM QUANTITY')
             item_name3 = str(input('Enter the item name:'))
