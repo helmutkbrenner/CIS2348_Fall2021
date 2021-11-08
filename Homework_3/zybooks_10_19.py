@@ -114,7 +114,7 @@ if __name__ == '__main__':
     #  Make a shopping class object with given info
     shopping_cart1 = ShoppingCart(customer_input_name, customer_input_date)
 
-    # Made a list of approved inputs and initialized a variable to hold the user command
+    #  This is the main part of the interface where required information is gotten and
     user_command = ''
     print_menu()
     while user_command != 'q':
@@ -151,4 +151,5 @@ if __name__ == '__main__':
             print_menu()
             continue
         else:
+            #  This might be a cheesy way to re prompt, but it works.
             continue
