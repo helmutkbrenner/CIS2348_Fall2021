@@ -42,15 +42,15 @@ class ShoppingCart:
             print('Item not found in cart. Nothing removed.')
 
     #  similar logic to the above function, takes a object item and a new quantity and assigns the quantity if found.
-    def modify_item(self, item_object, new_quantity):
+    def modify_item(self, item_name, new_quantity):
         found_flag = False
         for i in range(len(self.cart_items)):
-            if item_object == self.cart_items[i]:
+            if item_name == self.cart_items[i].item_name:
                 self.cart_items[i].item_quantity = new_quantity
                 found_flag = True
                 break
         if not found_flag:
-            print('Item not found in cart. Nothing modified')
+            print('Item not found in cart. Nothing modified.')
 
     # returns the quantity of all items in the cart
     def get_num_items_in_cart(self):
@@ -69,7 +69,10 @@ class ShoppingCart:
     # uses the function get_cost_of_cart and then prints it. Alternate message if cart is empty.
     def print_total(self):
         if self.get_cost_of_cart() == 0:
-            print('SHOPPING CART IS EMPTY')
+            print('{}\'s Shopping Cart - {}'.format(self.customer_name, self.current_date))
+            print('Number of Items: {}\n'.format(self.get_num_items_in_cart()))
+            print('SHOPPING CART IS EMPTY\n')
+            print('Total: ${}'.format(self.get_cost_of_cart()))
         else:
             print('{}\'s Shopping Cart - {}'.format(self.customer_name, self.current_date))
             print('Number of Items: {}\n'.format(self.get_num_items_in_cart()))
@@ -78,7 +81,7 @@ class ShoppingCart:
                 print('{} {} @ ${:.0f} = ${:.0f}'.format(self.cart_items[k].item_name, self.cart_items[k].item_quantity,
                                                          self.cart_items[k].item_price,
                                                          (self.cart_items[k].item_price * self.cart_items[k].item_quantity)))
-            print('\nTotal: {}'.format(self.get_cost_of_cart()))
+            print('\nTotal: ${}'.format(self.get_cost_of_cart()))
 
     # Prints a list of the items in the cart and their quantities.
     def print_descriptions(self):
@@ -90,7 +93,7 @@ class ShoppingCart:
 
 def print_menu():
     #  Prints the main menu
-    print('MENU')
+    print('\nMENU')
     print('a - Add item to cart')
     print('r - Remove item from cart')
     print('c - Change item quantity')
@@ -106,7 +109,7 @@ if __name__ == '__main__':
 
     #  Output the information given
     print('\nCustomer name: {}'.format(customer_input_name))
-    print('Today\'s date: {}\n'.format(customer_input_date))
+    print('Today\'s date: {}'.format(customer_input_date))
 
     #  Make a shopping class object with given info
     shopping_cart1 = ShoppingCart(customer_input_name, customer_input_date)
@@ -115,13 +118,13 @@ if __name__ == '__main__':
     user_command = ''
     print_menu()
     while user_command != 'q':
-        user_command = str(input('Choose an option:'))
+        user_command = str(input('Choose an option:\n'))
         if user_command == 'a':
             print('ADD ITEM TO CART')
             item_name1 = str(input('Enter the item name:\n'))
+            item_description1 = str(input('Enter the item description:\n'))
             item_price1 = int(input('Enter the item price:\n'))
             item_quantity1 = int(input('Enter the item quantity:\n'))
-            item_description1 = str(input('Enter the item description:\n'))
             shopping_cart1.add_item((ItemToPurchase(item_name1, item_price1, item_quantity1, item_description1)))
             print_menu()
             continue
@@ -131,21 +134,21 @@ if __name__ == '__main__':
             print_menu()
             continue
         elif user_command == 'i':
-            print('OUTPUT ITEMS\' DESCRIPTION')
+            print('OUTPUT ITEMS\' DESCRIPTIONS')
             shopping_cart1.print_descriptions()
             print_menu()
             continue
         elif user_command == 'r':
-            print('REMOVED ITEM FROM CART')
+            print('REMOVE ITEM FROM CART')
             shopping_cart1.remove_item(str(input('Enter name of item to remove:\n')))
             print_menu()
             continue
         elif user_command == 'c':
             print('CHANGE ITEM QUANTITY')
-            item_name3 = str(input('Enter the item name:'))
-            desired_quantity = int(input('Enter the new quantity:'))
-            #  TODO
-            #  Fix the modify item method to accept a name of an item and then it should be basically done.
-            #  shopping_cart1.modify_item()
+            item_name3 = str(input('Enter the item name:\n'))
+            desired_quantity = int(input('Enter the new quantity:\n'))
+            shopping_cart1.modify_item(item_name3, desired_quantity)
+            print_menu()
+            continue
         else:
             continue
