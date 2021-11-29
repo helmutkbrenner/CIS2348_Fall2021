@@ -1,7 +1,8 @@
 #  Helmut Brenner  #
 #  2037275  #
 
-def selection_sort_descend_trace(integer_list):
+def selection_sort_descend_trace(string_list):
+    integer_list = [int(i) for i in string_list]
     for k in range(len(integer_list) - 1):
         index_of_smallest = k
         for j in range(k + 1, len(integer_list)):
@@ -11,7 +12,9 @@ def selection_sort_descend_trace(integer_list):
         number = integer_list[k]
         integer_list[k] = integer_list[index_of_smallest]
         integer_list[index_of_smallest] = number
-        print(' '.join(integer_list) + ' ')
+
+        formatted_numbers = ' '.join([str(i) for i in integer_list])
+        print(formatted_numbers + ' ')
 
 
 if __name__ == '__main__':
