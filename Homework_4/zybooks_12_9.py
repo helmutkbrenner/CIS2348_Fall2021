@@ -8,9 +8,12 @@ if __name__ == '__main__':
     while name != '-1':
         # FIXME: The following line will throw ValueError exception.
         #        Insert try/except blocks to catch the exception.
-        age = int(parts[1]) + 1
-        print('{} {}'.format(name, age))
-
+        try:
+            age = int(parts[1]) + 1
+            print('{} {}'.format(name, age))
+        except ValueError as exception:
+            age = 0
+            print('{} {}'.format(name, age))
         # Get next line
         parts = input().split()
         name = parts[0]
