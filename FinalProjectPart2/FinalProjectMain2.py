@@ -110,3 +110,16 @@ if __name__ == '__main__':
                 line_writer4.writerow([sorted_by_price[o].item_id, sorted_by_price[o].manufacturer,
                                        sorted_by_price[o].item_type, sorted_by_price[o].price,
                                        sorted_by_price[o].service_date.strftime('%m/%d/%Y')])
+
+    #  Gonna need a list of brands later to strip user input of extraneous words
+    brands = FinalProjectFunc2.get_list_of_brands(sorted_by_manufacturer)
+    print(brands)
+
+    user_input = ''
+    while user_input != 'q':
+        try:
+            user_query = FinalProjectFunc2.query_for_manufacturer_type()
+            print(user_query)
+        except:
+            print('No such item in inventory')
+        user_input = input('\'q\' to quit\n ')

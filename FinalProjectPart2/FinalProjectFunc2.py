@@ -55,3 +55,19 @@ def file_name_formatter(type_list):
     from string import capwords
     formatted_list = [type.capitalize() + 'Inventory.csv' for type in type_list]
     return formatted_list
+
+
+def get_list_of_brands(class_list_by_brand):
+    #  Gets a list of all the brands, without repeats for reference in the main program. Will be used to strip extra
+    #  words from the user input.
+    list_of_brands = []
+    for p in range(len(class_list_by_brand)):
+        if class_list_by_brand[p].manufacturer not in list_of_brands:
+            list_of_brands.append(class_list_by_brand[p].manufacturer)
+    return list_of_brands
+
+
+def query_for_manufacturer_type():
+    #  This function will get the user query. and return a list of the results.
+    qd_manufacturer_item_type = input('What Manufacturer and Item Type are you looking for?\n').split()
+    return qd_manufacturer_item_type
