@@ -71,3 +71,40 @@ def query_for_manufacturer_type():
     #  This function will get the user query. and return a list of the results.
     qd_manufacturer_item_type = input('What Manufacturer and Item Type are you looking for?\n').split()
     return qd_manufacturer_item_type
+
+
+def query_parser(query_list, brands, types):
+    # This function will parse the query list for relevant words. and check to make sure man. or item_type was not entered
+    # twice.
+    query_list1 = []
+    query_list2 = []
+    query_list3 = []
+    #  This statement checks for relevant words and adds them to query_list1
+    for i in range(len(query_list)):
+        if query_list[i] in brands:
+            query_list1.append(query_list[i])
+        elif query_list[i] in types:
+            query_list1.append(query_list[i])
+    #  This statement checks for a double input by filtering unique inputs into query_list2
+    for i in range(len(query_list1)):
+        if query_list1[i] not in query_list2:
+            query_list2.append(query_list1[i])
+    #  This statement ensures proper order of the entries and adds them to query_list3
+    for i in range(len(query_list2)):
+        if query_list2[i] in brands:
+            query_list3.insert(0, query_list2[i])
+        elif query_list2[i] in types:
+            query_list3.append(query_list2[i])
+    return query_list3
+
+
+
+
+
+#  def query_checker(query_list):
+    # This function will check the query for a number of exceptional inputs. #1 Manufacturer or Item type NOT in
+    # inventory. #2 more than one type or manufacturer entered #3 Combo NOT in inventory. It must also strip excess words
+    # that are not a brand or an item type. Gonna break this down.
+
+
+#  def inventory_check(manufacturer, item_type):

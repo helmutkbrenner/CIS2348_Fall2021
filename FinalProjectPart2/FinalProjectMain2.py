@@ -114,12 +114,12 @@ if __name__ == '__main__':
     #  Gonna need a list of brands later to strip user input of extraneous words
     brands = FinalProjectFunc2.get_list_of_brands(sorted_by_manufacturer)
     print(brands)
+    print(ref_list_item_types)
 
     user_input = ''
     while user_input != 'q':
-        try:
-            user_query = FinalProjectFunc2.query_for_manufacturer_type()
-            print(user_query)
-        except:
-            print('No such item in inventory')
+        user_query = FinalProjectFunc2.query_for_manufacturer_type()
+        clean_user_query = FinalProjectFunc2.query_parser(user_query, brands, ref_list_item_types)
+        print(user_query)
+        print(clean_user_query)
         user_input = input('\'q\' to quit\n ')
