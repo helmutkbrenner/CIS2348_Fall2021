@@ -85,7 +85,8 @@ def query_parser(query_list, brands, types):
             query_list1.append(query_list[i])
         elif query_list[i] in types:
             query_list1.append(query_list[i])
-    #  This statement checks for a double input by filtering unique inputs into query_list2
+    #  This statement checks for a double input by filtering unique inputs into query_list2. Will allow for double input
+    # of brands and items that ARE in inventory. I see this as a feature lol.
     for i in range(len(query_list1)):
         if query_list1[i] not in query_list2:
             query_list2.append(query_list1[i])
@@ -98,13 +99,19 @@ def query_parser(query_list, brands, types):
     return query_list3
 
 
+def query_checker(clean_query_list, item_list_sorted_by_manufacturer):
+    verdict = False
 
+    # This statement will check if more than one type or manufacturer entered and if a manufacturer or type that is NOT
+    # in inventory is submitted, the query_parser function will spit out a list of NOT 2 elements so this == becomes a
+    # catch all.
+    if range(len(clean_query_list) == 2):
+        manufacturer = clean_query_list[0]
+        item_type = clean_query_list[1]
 
-
-#  def query_checker(query_list):
-    # This function will check the query for a number of exceptional inputs. #1 Manufacturer or Item type NOT in
-    # inventory. #2 more than one type or manufacturer entered #3 Combo NOT in inventory. It must also strip excess words
-    # that are not a brand or an item type. Gonna break this down.
-
-
-#  def inventory_check(manufacturer, item_type):
+    #  This statement will check if Combo in inventory.
+        for i in range(len(item_list_sorted_by_manufacturer)):
+            if item_list_sorted_by_manufacturer[i].manufacturer == manufacturer and item_list_sorted_by_manufacturer[i].item_type == item_type:
+                verdict = True
+                return verdict
+    return verdict

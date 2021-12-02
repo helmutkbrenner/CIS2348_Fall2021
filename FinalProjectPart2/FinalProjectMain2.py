@@ -120,6 +120,14 @@ if __name__ == '__main__':
     while user_input != 'q':
         user_query = FinalProjectFunc2.query_for_manufacturer_type()
         clean_user_query = FinalProjectFunc2.query_parser(user_query, brands, ref_list_item_types)
+
+        user_query_verdict = FinalProjectFunc2.query_checker(clean_user_query, sorted_by_manufacturer)
         print(user_query)
         print(clean_user_query)
+
+        if not user_query_verdict:
+            print('No such item in inventory')
+
+
         user_input = input('\'q\' to quit\n ')
+
