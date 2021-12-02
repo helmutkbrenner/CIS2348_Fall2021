@@ -117,29 +117,38 @@ if __name__ == '__main__':
     user_input = ''
     item_object = -1
     while user_input != 'q':
+        # This statement gets the user input using a function and assigns to user query. Then user query is cleaned by
+        # the query parser function which uses a list of all the brands and types in inventory to look for relevant words.
         user_query = FinalProjectFunc2.query_for_manufacturer_type()
         clean_user_query = FinalProjectFunc2.query_parser(user_query, brands, ref_list_item_types)
 
         # checks to make sure that the clean user query is IN inventory and that the user entered a single Manufacturer
         # and a single item type.
         user_query_verdict, item_object = FinalProjectFunc2.query_checker(clean_user_query, sorted_by_manufacturer)
+
+        # if the above function returns a false flag then this print statement executes and re-prompts the user.
         if not user_query_verdict:
             print('No such item in inventory')
             continue
-        #  print(item_object)
-        #  print(past_serv_date_list)
-        #  print(item_object[0])
-        #  print(item_object[1])
 
+        #  With a list of class objects we got from inventory, the function statement below will see if any of the items
+        #  that match the query are past service date or damaged. it will return a false flag if any or all of the items
+        #  are damaged or past service date. It will return a True flag when a non-damaged and non-past due item is found.
+        #  if multiple items are found, the priciest one will automatically be chosen.
         user_query_verdict2, item_object2 = FinalProjectFunc2.serv_damage_checker(item_object, past_serv_date_list)
         if not user_query_verdict2:
             print('The item you are looking for is past its service date or damaged')
             continue
-        # print(user_query_verdict2)
-        # print(item_object2)
 
-        # This checks the user_query_verdict and prints the statement if needed.
+        # This checks the user_query_verdict and user_query_verdict2. Both must be true to print the statement with the
+        # user's query retrieved. item_object2 is the class object that the user is looking for.
         if user_query_verdict is True and user_query_verdict2 is True:
             print('Your item is: {} {} {} ${}'.format(item_object2.item_id, item_object2.manufacturer, item_object2.item_type,
                                                       item_object2.price))
+
+        # TODO part iii.
+        similar_item_list = FinalProjectFunc2.similar_item_finder(item_object2, sorted_by_type)
+        print(similar_item_list)
+        print(similar_item_list[0].item_id, similar_item_list[0].manufacturer)
+        print('You may also, consider: {} {} {} ${}')
         user_input = input('\'q\' to quit\n ')

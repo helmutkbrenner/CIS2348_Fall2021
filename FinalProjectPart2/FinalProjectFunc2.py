@@ -100,11 +100,13 @@ def query_parser(query_list, brands, types):
 
 
 def query_checker(clean_query_list, item_list_sorted_by_manufacturer):
+    #  This function takes the cleaned query as a list of words. it also takes a list of item objects sorted by manufacturer
+    #  that we sorted earlier. This function will return false if user entered multiple types or manufacturer. if the user
+    # input is correct then it will check inventory to see if the combo is available, and will provide a list of matching
+    # items as well as a true flag.
     verdict = False
     list_of_items = []
-    # This statement will check if more than one type or manufacturer entered and if a manufacturer or type that is NOT
-    # in inventory is submitted, the query_parser function will spit out a list of NOT 2 elements so this == becomes a
-    # catch all.
+
     if range(len(clean_query_list) == 2):
         manufacturer = clean_query_list[0]
         item_type = clean_query_list[1]
@@ -122,6 +124,8 @@ def serv_damage_checker(found_item_object_list, past_serv_date_list):
     #  This function takes a list of parsed objects that meet the criteria of the original query,
     verdict = False
     from operator import attrgetter
+    # here we sort the list of parsed objects so that they are sorted by price. This way the very first item that meets
+    # the query criteria is always the priciest one.
     found_item_object_list1 = sorted(found_item_object_list, key=attrgetter('price'), reverse=True)
 
     # If only a single match is found in the database then this statement executes. It will compare the object to the
@@ -131,3 +135,15 @@ def serv_damage_checker(found_item_object_list, past_serv_date_list):
             verdict = True
             return verdict, found_item_object_list1[i]
     return verdict, found_item_object_list
+
+
+def similar_item_finder(item_object2, sorted_by_type):
+    item_to_look_for = item_object2.item_type
+    item_to_look_for_id = item_object2.item_id
+    similar_items_list = []
+
+    for i in range(len(sorted_by_type)):
+        if item_to_look_for == sorted_by_type[i].item_type and item_to_look_for_id != sorted_by_type[i].item_id:
+            similar_items_list.append(sorted_by_type[i])
+    return similar_items_list
+
