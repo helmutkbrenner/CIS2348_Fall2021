@@ -119,6 +119,7 @@ def query_checker(clean_query_list, item_list_sorted_by_manufacturer):
 
 
 def serv_damage_checker(found_item_object_list, past_serv_date_list):
+    #  This function takes a list of parsed objects that meet the criteria of the original query,
     verdict = False
     from operator import attrgetter
     found_item_object_list1 = sorted(found_item_object_list, key=attrgetter('price'), reverse=True)
@@ -130,5 +131,3 @@ def serv_damage_checker(found_item_object_list, past_serv_date_list):
             verdict = True
             return verdict, found_item_object_list1[i]
     return verdict, found_item_object_list
-
-

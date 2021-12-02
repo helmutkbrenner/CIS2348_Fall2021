@@ -123,22 +123,23 @@ if __name__ == '__main__':
         # checks to make sure that the clean user query is IN inventory and that the user entered a single Manufacturer
         # and a single item type.
         user_query_verdict, item_object = FinalProjectFunc2.query_checker(clean_user_query, sorted_by_manufacturer)
-
-        print(item_object)
-        print(past_serv_date_list)
-        print(item_object[0])
-        print(item_object[1])
-
-        user_query_verdict2, item_object2 = FinalProjectFunc2.serv_damage_checker(item_object, past_serv_date_list)
-
-        print(user_query_verdict2)
-        print(item_object2)
-
-        # This checks the user_query_verdict and prints the statement if needed.
         if not user_query_verdict:
             print('No such item in inventory')
-        elif not user_query_verdict2:
+            continue
+        #  print(item_object)
+        #  print(past_serv_date_list)
+        #  print(item_object[0])
+        #  print(item_object[1])
+
+        user_query_verdict2, item_object2 = FinalProjectFunc2.serv_damage_checker(item_object, past_serv_date_list)
+        if not user_query_verdict2:
             print('The item you are looking for is past its service date or damaged')
-        else:
-            print('Your item is: {} {} {} ${}')
+            continue
+        # print(user_query_verdict2)
+        # print(item_object2)
+
+        # This checks the user_query_verdict and prints the statement if needed.
+        if user_query_verdict is True and user_query_verdict2 is True:
+            print('Your item is: {} {} {} ${}'.format(item_object2.item_id, item_object2.manufacturer, item_object2.item_type,
+                                                      item_object2.price))
         user_input = input('\'q\' to quit\n ')
