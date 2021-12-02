@@ -101,7 +101,7 @@ def query_parser(query_list, brands, types):
 
 def query_checker(clean_query_list, item_list_sorted_by_manufacturer):
     verdict = False
-
+    list_of_items = []
     # This statement will check if more than one type or manufacturer entered and if a manufacturer or type that is NOT
     # in inventory is submitted, the query_parser function will spit out a list of NOT 2 elements so this == becomes a
     # catch all.
@@ -113,5 +113,22 @@ def query_checker(clean_query_list, item_list_sorted_by_manufacturer):
         for i in range(len(item_list_sorted_by_manufacturer)):
             if item_list_sorted_by_manufacturer[i].manufacturer == manufacturer and item_list_sorted_by_manufacturer[i].item_type == item_type:
                 verdict = True
-                return verdict
-    return verdict
+                list_of_items.append(item_list_sorted_by_manufacturer[i])
+        return verdict, list_of_items
+    return verdict, -1
+
+
+def serv_damage_checker(found_item_object_list, past_serv_date_list):
+    verdict = False
+    from operator import attrgetter
+    found_item_object_list1 = sorted(found_item_object_list, key=attrgetter('price'), reverse=True)
+
+    # If only a single match is found in the database then this statement executes. It will compare the object to the
+    # past service date lists and will then also check to see if the item is past service date or damaged.
+    for i in range(len(found_item_object_list1)):
+        if found_item_object_list1[i] not in past_serv_date_list and found_item_object_list1[i].damaged == '':
+            verdict = True
+            return verdict, found_item_object_list1[i]
+    return verdict, found_item_object_list
+
+

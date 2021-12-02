@@ -113,21 +113,32 @@ if __name__ == '__main__':
 
     #  Gonna need a list of brands later to strip user input of extraneous words
     brands = FinalProjectFunc2.get_list_of_brands(sorted_by_manufacturer)
-    print(brands)
-    print(ref_list_item_types)
 
     user_input = ''
+    item_object = -1
     while user_input != 'q':
         user_query = FinalProjectFunc2.query_for_manufacturer_type()
         clean_user_query = FinalProjectFunc2.query_parser(user_query, brands, ref_list_item_types)
 
-        user_query_verdict = FinalProjectFunc2.query_checker(clean_user_query, sorted_by_manufacturer)
-        print(user_query)
-        print(clean_user_query)
+        # checks to make sure that the clean user query is IN inventory and that the user entered a single Manufacturer
+        # and a single item type.
+        user_query_verdict, item_object = FinalProjectFunc2.query_checker(clean_user_query, sorted_by_manufacturer)
 
+        print(item_object)
+        print(past_serv_date_list)
+        print(item_object[0])
+        print(item_object[1])
+
+        user_query_verdict2, item_object2 = FinalProjectFunc2.serv_damage_checker(item_object, past_serv_date_list)
+
+        print(user_query_verdict2)
+        print(item_object2)
+
+        # This checks the user_query_verdict and prints the statement if needed.
         if not user_query_verdict:
             print('No such item in inventory')
-
-
+        elif not user_query_verdict2:
+            print('The item you are looking for is past its service date or damaged')
+        else:
+            print('Your item is: {} {} {} ${}'.format(item_object2.item_id))
         user_input = input('\'q\' to quit\n ')
-
