@@ -140,5 +140,5 @@ if __name__ == '__main__':
         elif not user_query_verdict2:
             print('The item you are looking for is past its service date or damaged')
         else:
-            print('Your item is: {} {} {} ${}'.format(item_object2.item_id))
+            print('Your item is: {} {} {} ${}')
         user_input = input('\'q\' to quit\n ')
