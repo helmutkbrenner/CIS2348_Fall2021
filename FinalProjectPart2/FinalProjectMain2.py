@@ -146,13 +146,14 @@ if __name__ == '__main__':
             print('Your item is: {} {} {} ${}'.format(item_object2.item_id, item_object2.manufacturer, item_object2.item_type,
                                                       item_object2.price))
 
-        # TODO part iii.
         most_similar_item, user_query_verdict3 = FinalProjectFunc2.similar_item_finder(item_object2, sorted_by_type,
                                                                                        past_serv_date_list)
 
         if user_query_verdict3:
-            print('You may also, consider: {} {} {} ${}'.format(most_similar_item.item_id,
-                                                                most_similar_item.manufacturer,
-                                                                most_similar_item.item_type,
-                                                                most_similar_item.price))
+            print('You may also consider: {} {} {} ${}'.format(most_similar_item.item_id, most_similar_item.manufacturer,
+                                                               most_similar_item.item_type, most_similar_item.price))
+
+        #  This statement will allow the user to quit the program or enter a new query.
+        if user_query_verdict2:
+            user_input = input('Press any key to query again. Or press \'q\' to exit.\n')
             continue

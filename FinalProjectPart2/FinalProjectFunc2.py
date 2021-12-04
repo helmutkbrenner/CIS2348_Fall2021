@@ -166,4 +166,3 @@ def similar_item_finder(item_object2, sorted_by_type, past_serv_date_list):
         return most_similar_item, found_flag
 
     return item_object2, found_flag
-
