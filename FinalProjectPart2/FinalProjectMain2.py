@@ -147,8 +147,12 @@ if __name__ == '__main__':
                                                       item_object2.price))
 
         # TODO part iii.
-        similar_item_list = FinalProjectFunc2.similar_item_finder(item_object2, sorted_by_type)
-        print(similar_item_list)
-        print(similar_item_list[0].item_id, similar_item_list[0].manufacturer)
-        print('You may also, consider: {} {} {} ${}')
-        user_input = input('\'q\' to quit\n ')
+        most_similar_item, user_query_verdict3 = FinalProjectFunc2.similar_item_finder(item_object2, sorted_by_type,
+                                                                                       past_serv_date_list)
+
+        if user_query_verdict3:
+            print('You may also, consider: {} {} {} ${}'.format(most_similar_item.item_id,
+                                                                most_similar_item.manufacturer,
+                                                                most_similar_item.item_type,
+                                                                most_similar_item.price))
+            continue

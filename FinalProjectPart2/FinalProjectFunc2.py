@@ -137,13 +137,33 @@ def serv_damage_checker(found_item_object_list, past_serv_date_list):
     return verdict, found_item_object_list
 
 
-def similar_item_finder(item_object2, sorted_by_type):
+def similar_item_finder(item_object2, sorted_by_type, past_serv_date_list):
     item_to_look_for = item_object2.item_type
     item_to_look_for_id = item_object2.item_id
+    item_to_look_for_price = item_object2.price
     similar_items_list = []
+    most_similar_item = None
+    found_flag = False
 
+    #  This statement searches through the list of class objects and appends items of the same type to similar_item_list
     for i in range(len(sorted_by_type)):
         if item_to_look_for == sorted_by_type[i].item_type and item_to_look_for_id != sorted_by_type[i].item_id:
             similar_items_list.append(sorted_by_type[i])
-    return similar_items_list
+
+    # This statement will ensure that the returned item is the closest in price to the item_object2 and it is NOT the same
+    #  manufacturer.
+    smallest_differential = 99999
+    for i in range(len(similar_items_list)):
+        if similar_items_list[i].manufacturer != item_object2.manufacturer:
+            if similar_items_list[i] not in past_serv_date_list and similar_items_list[i].damaged == '':
+                differential = abs(item_to_look_for_price - similar_items_list[i].price)
+                if differential < smallest_differential:
+                    smallest_differential = differential
+                    most_similar_item = similar_items_list[i]
+                    found_flag = True
+
+    if found_flag:
+        return most_similar_item, found_flag
+
+    return item_object2, found_flag
 
